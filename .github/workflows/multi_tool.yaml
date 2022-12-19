@@ -1,0 +1,137 @@
+name: multi_tool
+# either manually started, or on a schedule
+on: [ push, workflow_dispatch ]
+jobs:
+  multi_tool:
+    env:
+        OPENLANE_ROOT:  /home/runner/openlane
+        PDK_ROOT:       /home/runner/pdk
+        PDK:            sky130B
+    # ubuntu
+    runs-on: ubuntu-latest
+    steps:
+    # need the repo checked out
+    - name: checkout repo
+      uses: actions/checkout@v3
+
+    # build pdk
+    - name: pdk & openlane & precheck
+      run: |
+        make setup
+        make precheck
+
+    - name: multi tools
+      run: |
+        cd $HOME
+        git clone https://github.com/mattvenn/multi_project_tools.git
+
+
+    # install riscv gcc
+    - name: riscv gcc
+      run: |
+        cd $HOME
+        wget https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-8.3.0-2020.04.1-x86_64-linux-ubuntu14.tar.gz
+        tar -xzf riscv64-unknown-elf-gcc-8.3.0-2020.04.1-x86_64-linux-ubuntu14.tar.gz
+
+    # remove existing compressed gds
+    - name: remove compressed gds
+      run: | 
+        rm -f gds/*gz
+        find /home/runner/work/zero_to_asic_mpw8/zero_to_asic_mpw8/
+
+    # install oss fpga tools
+    - name: install oss-cad-suite
+      uses: YosysHQ/setup-oss-cad-suite@v1
+      with:
+          python-override: true # don't want to use that python
+          osscadsuite-version: '2022-09-03' # pin the version, latest one fails to work with caravel : https://github.com/mattvenn/wrapped_rgb_mixer/actions/runs/3696349424/jobs/6259927750#step:20:35
+    - run: | 
+        yosys --version
+        iverilog -V
+        which python3
+        which python
+        python3 -V
+        python -V
+        cocotb-config --libpython
+        cocotb-config --python-bin
+
+    # need python
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    - run: pip install -r $HOME/multi_project_tools/requirements.txt
+
+    # test python
+    - name: test python
+      run:
+        cocotb-config --libpython
+        cocotb-config --python-bin
+
+    # fetch the repos
+    - name: fetch all
+      run: |
+        mkdir /home/runner/projects
+        python $HOME/multi_project_tools/multi_tool.py --clone-repos --clone-shared-repos 
+        gunzip -r /home/runner/projects
+        find /home/runner/projects -name '*gds*'
+
+    # install projects
+    - name: install project
+      run: python $HOME/multi_project_tools/multi_tool.py --create-openlane-config --copy-project  --copy-gds --force
+
+    # tests
+    - name: test gds
+      run: python $HOME/multi_project_tools/multi_tool.py --test-gds
+
+#    - name: test prove tristate - fails due to logic loop in silife
+#      run: python $HOME/multi_project_tools/multi_tool.py --prove-tristate --openram
+
+    - name: test ports
+      run: python $HOME/multi_project_tools/multi_tool.py --test-ports
+
+    - name: test module
+      run: python $HOME/multi_project_tools/multi_tool.py --test-module
+
+    - name: prove wrapper
+      run: python $HOME/multi_project_tools/multi_tool.py --prove-wrapper
+
+# needs netgen
+#    - name: lvs
+#      run: python ./multi_tool.py --test-lvs --local github_local.yaml
+
+# needs local directory from multi_project
+#    - name: tristate-z
+#      run: python $HOME/multi_project_tools/multi_tool.py --test-tristate-z
+
+    - name: docs
+      run: python $HOME/multi_project_tools/multi_tool.py --generate-doc  --force
+
+    # test tristate driver, not working yet on github actions
+#    - name: tristate driver
+#      run: python $HOME/multi_project_tools/multi_tool.py --test-tristate-driver
+
+    # run the caravel test
+    - name: caravel test
+      run: python $HOME/multi_project_tools/multi_tool.py --test-caravel
+
+    # build gds
+    - name: user project wrapper GDS
+      run: make user_project_wrapper
+
+    - name: precheck
+      run: make run-precheck
+
+    # archive the gds and final report for the user project wrapper
+    - name: Archive Wrapper GDS
+      uses: actions/upload-artifact@v2
+      with:
+          name: Wrapper GDS
+          path: gds/user_project_wrapper.gds
+
+    - name: Archive Wrapper Signoff
+      uses: actions/upload-artifact@v2
+      with:
+          name: Wrapper Report
+          path: openlane/user_project_wrapper/runs/user_project_wrapper/reports/final_summary_report.csv
