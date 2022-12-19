@@ -7,7 +7,6 @@ caravel:
     rtl_dir:        /home/runner/work/zero_to_asic_mpw8/zero_to_asic_mpw8/verilog/rtl
     includes_dir:   /home/runner/work/zero_to_asic_mpw8/zero_to_asic_mpw8/verilog/includes/
     mgmt_root:      /home/runner/work/zero_to_asic_mpw8/zero_to_asic_mpw8/mgmt_core_wrapper/
-    config:         config.tcl
 
 env: # used for simulation
     GCC_PATH:       /home/runner/riscv64-unknown-elf-gcc-8.3.0-2020.04.1-x86_64-linux-ubuntu14/bin/
