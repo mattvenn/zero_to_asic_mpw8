@@ -1,5 +1,14 @@
 # Caravel user project includes
--v $(USER_PROJECT_VERILOG)/rtl/user_project_wrapper.v	     
--v $(USER_PROJECT_VERILOG)/rtl/user_proj_example.v
+-v $(USER_PROJECT_VERILOG)/rtl/user_project_wrapper.v
+//  3 RGB Mixer                      : /home/matt/work/asic-workshop/shuttle8/openlane/designs/wrapped_rgb_mixer
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_rgb_mixer/wrapper.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_rgb_mixer/rgb_mixer/src/debounce.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_rgb_mixer/rgb_mixer/src/encoder.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_rgb_mixer/rgb_mixer/src/pwm.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_rgb_mixer/rgb_mixer/src/rgb_mixer.v
+//  2 Frequency counter              : /home/matt/work/asic-workshop/shuttle8/openlane/designs/wrapped_frequency_counter
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_frequency_counter/wrapper.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_frequency_counter/frequency_counter/src/edge_detect.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_frequency_counter/frequency_counter/src/frequency_counter.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_frequency_counter/frequency_counter/src/seven_segment.v
 
- 
