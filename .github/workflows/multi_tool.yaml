@@ -52,7 +52,7 @@ jobs:
         cocotb-config --python-bin
 
     - name: python libs
-    - run: pip install -r $HOME/multi_project_tools/requirements.txt
+      run: pip install -r $HOME/multi_project_tools/requirements.txt
 
     # test python
     - name: test python
