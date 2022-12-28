@@ -78,6 +78,9 @@ ifeq ($(PDK),gf180mcuC)
 
 endif
 
+compress:
+	gzip -fn --best gds/*gds
+
 # Include Caravel Makefile Targets
 .PHONY: % : check-caravel
 %:

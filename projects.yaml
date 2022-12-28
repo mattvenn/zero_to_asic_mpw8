@@ -58,7 +58,7 @@ docs:
     macro_border:   25 # px
 
 projects:
-##    function_generator:
+#    function_generator:
 #        repo:   'https://github.com/mattvenn/wrapped_function_generator'
 #        commit: '701095fd880ad3bb80d6cec1d214a04e5676a65d'
 #        pos:    '350 1200 N'
@@ -72,3 +72,13 @@ projects:
         commit: 'mpw8'
         pos: '850 350 N'
 
+    single_channel:
+        # use my fork for fixes while author is on holiday
+        repo:   'https://github.com/mattvenn/wrapped_channel'
+        commit: 'main'
+        pos:    '350 1000 N'
+
+#wrapped_counter:
+        #repo:   'https://github.com/ellen-wood/wrapped_counter'
+        #commit: 'main'
+        #pos:    '350 500 N'

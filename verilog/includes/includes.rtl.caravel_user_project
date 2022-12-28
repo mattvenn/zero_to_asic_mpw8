@@ -11,4 +11,9 @@
 -v $(USER_PROJECT_VERILOG)/rtl/wrapped_frequency_counter/frequency_counter/src/edge_detect.v
 -v $(USER_PROJECT_VERILOG)/rtl/wrapped_frequency_counter/frequency_counter/src/frequency_counter.v
 -v $(USER_PROJECT_VERILOG)/rtl/wrapped_frequency_counter/frequency_counter/src/seven_segment.v
+//  1 Single GPS Tracking Channel (Partial) : /home/matt/work/asic-workshop/shuttle8/openlane/designs/wrapped_channel
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_channel/wrapper.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_channel/channel/src/channel.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_channel/channel/src/ca_code.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_channel/channel/src/nco.v
 
