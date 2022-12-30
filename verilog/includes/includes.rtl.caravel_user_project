@@ -16,4 +16,7 @@
 -v $(USER_PROJECT_VERILOG)/rtl/wrapped_channel/channel/src/channel.v
 -v $(USER_PROJECT_VERILOG)/rtl/wrapped_channel/channel/src/ca_code.v
 -v $(USER_PROJECT_VERILOG)/rtl/wrapped_channel/channel/src/nco.v
+//  4 Simon Says Game                : /home/matt/work/asic-workshop/shuttle8/openlane/designs/wrapped_simon_game
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_simon_game/wrapper.v
+-v $(USER_PROJECT_VERILOG)/rtl/wrapped_simon_game/simon-verilog/src/simon.v
 

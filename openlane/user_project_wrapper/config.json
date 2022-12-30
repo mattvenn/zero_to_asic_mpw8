@@ -7,7 +7,7 @@
     "CLOCK_PERIOD": 10,
     "CLOCK_PORT": "user_clock2",
     "CLOCK_NET": "mprj.clk",
-    "FP_PDN_MACRO_HOOKS": "wrapped_rgb_mixer_3 vccd1 vssd1 vccd1 vssd1, wrapped_frequency_counter_2 vccd1 vssd1 vccd1 vssd1, wrapped_channel_1 vccd1 vssd1 vccd1 vssd1",
+    "FP_PDN_MACRO_HOOKS": "wrapped_rgb_mixer_3 vccd1 vssd1 vccd1 vssd1, wrapped_frequency_counter_2 vccd1 vssd1 vccd1 vssd1, wrapped_channel_1 vccd1 vssd1 vccd1 vssd1, wrapped_simon_game_4 vccd1 vssd1 vccd1 vssd1",
     "MACRO_PLACEMENT_CFG": "dir::macro.cfg",
     "VERILOG_FILES_BLACKBOX": [
         "dir::../../verilog/rtl/defines.v",
@@ -16,12 +16,14 @@
     "EXTRA_LEFS": [
         "dir::../../lef/wrapped_rgb_mixer.lef",
         "dir::../../lef/wrapped_frequency_counter.lef",
-        "dir::../../lef/wrapped_channel.lef"
+        "dir::../../lef/wrapped_channel.lef",
+        "dir::../../lef/wrapped_simon_game.lef"
     ],
     "EXTRA_GDS_FILES": [
         "dir::../../gds/wrapped_rgb_mixer.gds",
         "dir::../../gds/wrapped_frequency_counter.gds",
-        "dir::../../gds/wrapped_channel.gds"
+        "dir::../../gds/wrapped_channel.gds",
+        "dir::../../gds/wrapped_simon_game.gds"
     ],
     "FP_PDN_CHECK_NODES": 0,
     "SYNTH_ELABORATE_ONLY": 1,

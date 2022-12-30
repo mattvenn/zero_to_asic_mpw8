@@ -73,8 +73,7 @@ projects:
         pos: '850 350 N'
 
     single_channel:
-        # use my fork for fixes while author is on holiday
-        repo:   'https://github.com/mattvenn/wrapped_channel'
+        repo:   'https://github.com/almostsquare/wrapped_channel'
         commit: 'main'
         pos:    '350 1000 N'
 
